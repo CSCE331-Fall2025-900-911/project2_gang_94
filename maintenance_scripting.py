@@ -3,6 +3,7 @@ import csv
 from datetime import datetime, timedelta
 import psycopg2
 
+# List of machines with IDs
 machines = [
   (1, "Tapioca Cooker"),
   (2, "Tea Brewer"),
@@ -15,7 +16,7 @@ machines = [
   (9, "Shaker Machine"),
   (10, "Syrup Dispenser")
 ]
-
+# Maintenance comment
 comments = [
     "Replaced worn parts",
     "Calibrated machine",
@@ -30,6 +31,7 @@ comments = [
 ]
 rows = []
 
+# Generate random maintenance records for each machine
 for menuID, name in machines:
     last_repair = datetime.now() - timedelta(days=random.randint(1, 180))
     comment = random.choice(comments)
@@ -43,7 +45,7 @@ for menuID, name in machines:
         "CostOfRepair": repair_cost
     })
 
-
+#write maintenance data into csv
 csv_filename = "maintenance.csv"
 with open(csv_filename, "w", newline="") as file:
     writer = csv.DictWriter(
@@ -55,6 +57,7 @@ with open(csv_filename, "w", newline="") as file:
 
 print("Maintenance csv generated successfully!")
 
+#connect to database
 conn = psycopg2.connect(
     database="gang_94_db",
     user='gang_94',
@@ -64,11 +67,12 @@ conn = psycopg2.connect(
 )
 
 cur = conn.cursor()
-
+#load data from csv to postgreSQL using copy_from
 with open("maintenance.csv", "r") as f1:
   next(f1)
   cur.copy_from(f1, "maintenance", sep=",")
 
+#commit changes and close connection
 conn.commit()
 cur.close()
 conn.close()

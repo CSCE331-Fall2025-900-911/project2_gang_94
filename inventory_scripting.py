@@ -3,6 +3,7 @@ import csv
 from datetime import datetime, timedelta
 import psycopg2
 
+#list of inventory items
 items = [
     (1, "Tapioca Pearls", (2000, 5000)),     
     (2, "Tea Leaves", (500, 1500)),            
@@ -25,7 +26,7 @@ items = [
     (19, "Fruit Syrup - Peach", (1, 4)),      
     (20, "Fruit Syrup - Lemon", (1, 4))       
 ]
-
+#generate inventory data
 rows = []
 
 for itemID, name, (min_q, max_q) in items:
@@ -44,6 +45,7 @@ for itemID, name, (min_q, max_q) in items:
         "reorderDate": reorder_date.date()
     })
 
+#write data into csv file
 csv_filename = "onHandInventory.csv"
 with open(csv_filename, "w", newline="") as file:
     writer = csv.DictWriter(
@@ -55,6 +57,7 @@ with open(csv_filename, "w", newline="") as file:
 
 print(f"Onhandinventory csv generated successfully.")
 
+#connect to database 
 conn = psycopg2.connect(
     database="gang_94_db",
     user='gang_94',
@@ -64,11 +67,12 @@ conn = psycopg2.connect(
 )
 
 cur = conn.cursor()
-
+#insert csv data into postgreSQL database using copy_from
 with open("onHandInventory.csv", "r") as f:
   next(f)
   cur.copy_from(f, "onhandinventory", sep=",")
 
+#commit changes and close connection
 conn.commit()
 cur.close()
 conn.close()
