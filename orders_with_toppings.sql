@@ -1,5 +1,6 @@
 SELECT
-    AVG(orders_per_month) AS avg_toppings_orders
+    month,
+    ROUND(AVG(orders_per_month)::numeric, 2) AS avg_toppings_orders
 FROM (
     SELECT
         EXTRACT(YEAR FROM orderdate) AS year,
@@ -8,4 +9,6 @@ FROM (
     FROM customers
     WHERE itemsused LIKE '%add%'
     GROUP BY year, month
-) AS monthly_count;
+) AS monthly_count
+GROUP BY month
+ORDER BY month;
