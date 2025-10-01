@@ -1,6 +1,6 @@
 SELECT 
-    YEAR(orderdate) AS year,
-    WEEK(orderdate, 1) AS week_number,   -- mode=1 means weeks start on Monday
+    EXTRACT(YEAR FROM orderdate) AS year,
+    EXTRACT(WEEK FROM orderdate) AS week_number,
     COUNT(orderid) AS orders_placed
 FROM Orders
 GROUP BY year, week_number

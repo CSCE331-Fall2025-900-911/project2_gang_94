@@ -1,8 +1,9 @@
 --query the find the longest working employee for day 
-SELECT name, schedule_date, hours_worked, customers_served
-FROM Employees e1
+SELECT employee_id, schedule_date, hours_worked, customers_served
+FROM Employees
+--WHERE schedule_date = '2024-10-01' -- if we do specific date 
 WHERE hours_worked = (
     SELECT MAX(hours_worked)
-    FROM Employees e2
-    WHERE e1.name = e2.name
+    FROM Employees 
+--  WHERE schedule_date = '2024-10-01'
 );
