@@ -28,12 +28,9 @@ order_id = 0
 
 peak_days = 1
 
-for d in range(num_days):
-    # Generates how many orders will be placed each day
-    
+for d in range(num_days):    
     # Date + offset of loop variable
     daily_start = start_date + timedelta(days=d)
-    
     # First parameter is date, last is time
     day_end = datetime.combine(daily_start.date(), (datetime.min + end_time).time())
 
@@ -43,7 +40,7 @@ for d in range(num_days):
 
     # Number of entries per day bounded by possible amount of time (9 am - 5 pm)
     num_entries = min(random.randint(min_daily_entries, max_daily_entries), max_given_time)
-
+    # Creates peak day on Christmas Day
     if (daily_start.month == 12 and daily_start.day == 25):
         num_entries = min(500, max_given_time)
     # Random offset 
@@ -60,8 +57,10 @@ for d in range(num_days):
         num_toppings = random.randint(0,3)
 
         while (num_drinks > 0):
+            # Keeps selecting random drinks and adding price to balance
             selected_drink = list(drinks.keys())[random.randint(0,len(drinks) -1)]
             bal += drinks[selected_drink]
+            # Adds toppings to each drink while there are still toppings available
             if (num_toppings > 0):
                 selected_topping = list(toppings.keys())[random.randint(0, len(toppings) - 1)]
                 total_drinks += " (add " + selected_topping + ")"
@@ -78,10 +77,5 @@ with open("customers.csv", "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerows(data)
 
-profits = 0
-for i in range(1, order_id):
-    profits += data[i][2]
-
-print(profits)
 
 

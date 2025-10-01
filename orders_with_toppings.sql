@@ -6,6 +6,6 @@ FROM (
         EXTRACT(MONTH FROM orderdate) AS month,
         COUNT(*) AS orders_per_month
     FROM customers
-    WHERE itemsused LIKE '%(%'
+    WHERE itemsused LIKE '%add%'
     GROUP BY year, month
 ) AS monthly_count;
