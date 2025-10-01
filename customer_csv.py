@@ -7,12 +7,12 @@ data = [
     ['orderid', 'itemsused', 'balancespent', 'orderdate']
 ]
 
-drinks = {'Pearl Milk Tea': 5.99, 'Fresh Matcha': 4.99, 'Lemonade': 3.99, 'Peach Tea': 4.99, 'Iced Tea': 3.99,
-          'Strawberry Matcha': 5.99, 'Halo Halo': 4.99, 'Tiger Boba': 5.99, 'Oolong Tea': 3.99, 'Black Tea': 3.99,
-          'Green Tea': 3.99, 'Green Honey Tea': 4.99, 'Black Honey Tea': 4.99, 'Coffee Milk Tea': 5.99,
-           'Thai Pearl Milk Tea': 5.99, 'Coffee Crema': 5.99}
+drinks = {'Pearl Milk Tea': 5.80, 'Fresh Matcha': 6.25, 'Lemonade': 5.20, 'Peach Tea': 6.25, 'Iced Thai Tea': 6.75,
+          'Strawberry Matcha': 6.50, 'Halo Halo': 6.95, 'Tiger Boba': 6.50, 'Oolong Tea': 4.65, 'Black Tea': 4.65,
+          'Green Tea': 4.65, 'Green Honey Tea': 4.85, 'Black Honey Tea': 4.85, 'Coffee Milk Tea': 6.25,
+           'Thai Pearl Milk Tea': 6.25, 'Coffee Crema': 6.50}
 
-toppings = {}
+toppings = {'Boba Pearls': .75, 'Ice Cream': 1.00, 'Honey Jelly': .75, 'Pudding': .75}
 
 
 # Start of dataset
@@ -48,14 +48,36 @@ for d in range(num_days):
     for o in offset:
         # Creates timestamp within day
         ts = daily_start + timedelta(seconds=o*seconds_gap)
-        selected_drink = list(drinks.keys())[random.randint(0,15)]
+        num_drinks = random.randint(1,5) - 1
+        selected_drink = list(drinks.keys())[random.randint(0,len(drinks) - 1)]
         bal = drinks[selected_drink]
+        total_drinks = selected_drink
+
+        num_toppings = random.randint(0,3)
+
+        while (num_drinks > 0):
+            selected_drink = list(drinks.keys())[random.randint(0,len(drinks) -1)]
+            bal += drinks[selected_drink]
+            if (num_toppings > 0):
+                selected_topping = list(toppings.keys())[random.randint(0, len(toppings) - 1)]
+                total_drinks += " (add " + selected_topping + ")"
+                bal += toppings[selected_topping]
+                num_toppings -= 1
+            total_drinks += ", " + selected_drink
+            num_drinks -= 1
         # Formats datetime object as readable string
-        iter_arr = [order_id, selected_drink, bal, ts.strftime("%Y-%m-%d %H:%M:%S")]
+        iter_arr = [order_id, total_drinks, round(bal,2), ts.strftime("%Y-%m-%d %H:%M:%S")]
         data.append(iter_arr)
         order_id += 1
-        # print(iter_arr)
 
 with open("customers.csv", "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerows(data)
+
+profits = 0
+for i in range(1, order_id):
+    profits += data[i][2]
+
+print(profits)
+
+
