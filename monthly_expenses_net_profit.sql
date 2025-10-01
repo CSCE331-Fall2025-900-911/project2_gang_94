@@ -13,7 +13,8 @@ SELECT
         WHEN EXTRACT(MONTH FROM startdate) = 9 THEN 'September'
         WHEN EXTRACT(MONTH FROM startdate) = 10 THEN 'October'
         WHEN EXTRACT(MONTH FROM startdate) = 11 THEN 'November'
-                ELSE 'December'
+        WHEN EXTRACT(MONTH FROM startdate) = 12 THEN 'December'
+        ELSE 'unlabeled'
     END AS season,
     SUM(totalexpenses)::numeric::money AS monthlyexpenses,
     SUM(totalsales-totalexpenses)::numeric::money as net_profit
