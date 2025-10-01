@@ -1,3 +1,4 @@
+
 SELECT 
     EXTRACT(YEAR FROM orderdate) AS year,
     EXTRACT(WEEK FROM orderdate) AS week_number,
