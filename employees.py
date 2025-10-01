@@ -10,11 +10,11 @@ employees = [
 
 start_date = datetime(2024, 10, 1)  # starting date
 num_days = 273  # generate 39 weeks of schedules
-shifts_per_day = 2  # e.g., morning & evening shifts
+shifts_per_day = 1  # e.g., morning & evening shifts
 
 data = [["employee_id", "name", "schedule_date", "hours_worked", "customers_served"]]
 
-emp_id = 1
+emp_id = 2
 
 for d in range(num_days):
     schedule_date = start_date + timedelta(days=d)
