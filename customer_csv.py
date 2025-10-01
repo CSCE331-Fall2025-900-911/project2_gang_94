@@ -26,6 +26,8 @@ seconds_gap = 45
 
 order_id = 0
 
+peak_days = 1
+
 for d in range(num_days):
     # Generates how many orders will be placed each day
     
@@ -42,6 +44,8 @@ for d in range(num_days):
     # Number of entries per day bounded by possible amount of time (9 am - 5 pm)
     num_entries = min(random.randint(min_daily_entries, max_daily_entries), max_given_time)
 
+    if (daily_start.month == 12 and daily_start.day == 25):
+        num_entries = min(500, max_given_time)
     # Random offset 
     offset = sorted(random.sample(range(max_given_time), num_entries))
 
