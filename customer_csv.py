@@ -2,6 +2,7 @@ import csv
 # import pandas as pd
 import random
 from datetime import datetime, timedelta
+import psycopg2
 
 data = [
     ['orderid', 'itemsused', 'balancespent', 'orderdate']
@@ -66,7 +67,7 @@ for d in range(num_days):
                 total_drinks += " (add " + selected_topping + ")"
                 bal += toppings[selected_topping]
                 num_toppings -= 1
-            total_drinks += ", " + selected_drink
+            total_drinks += "; " + selected_drink
             num_drinks -= 1
         # Formats datetime object as readable string
         iter_arr = [order_id, total_drinks, round(bal,2), ts.strftime("%Y-%m-%d %H:%M:%S")]
@@ -77,5 +78,24 @@ with open("customers.csv", "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerows(data)
 
+conn = psycopg2.connect(
+    database="gang_94_db",
+    user='gang_94',
+    password='gang_94',
+    host='csce-315-db.engr.tamu.edu',
+    port='5432'
+)
 
+cur = conn.cursor()
+#insert csv data into postgreSQL database using copy_from
+with open("customers.csv", "r") as f:
+  next(f)
+  cur.copy_from(f, "customers", sep=",")
+
+#commit changes and close connection
+conn.commit()
+cur.close()
+conn.close()
+
+print("customers table populated successfully.")
 

@@ -1,6 +1,7 @@
 import csv
 import random
 from datetime import datetime, timedelta
+import psycopg2
 
 data = [['startdate', 'totalsales', 'totalexpenses', 'profitchange']]
 
@@ -43,6 +44,27 @@ print(data)
 with open('profits.csv', 'w', newline='') as f_write:
     writer = csv.writer(f_write)
     writer.writerows(data)
+
+conn = psycopg2.connect(
+    database="gang_94_db",
+    user='gang_94',
+    password='gang_94',
+    host='csce-315-db.engr.tamu.edu',
+    port='5432'
+)
+
+cur = conn.cursor()
+#insert csv data into postgreSQL database using copy_from
+with open("profits.csv", "r") as f:
+  next(f)
+  cur.copy_from(f, "profits", sep=",")
+
+#commit changes and close connection
+conn.commit()
+cur.close()
+conn.close()
+
+print("profits table populated successfully.")
 
 
 

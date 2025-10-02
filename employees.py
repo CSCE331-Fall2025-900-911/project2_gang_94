@@ -1,6 +1,7 @@
 import random
 from datetime import datetime, timedelta
 import csv 
+import psycopg2
 
 # random employees names 
 employees = [
@@ -39,3 +40,24 @@ with open("employees.csv", "w", newline="") as f:
     writer.writerows(data)
 
 print("✅ Employee schedule data written to employees.csv")
+
+conn = psycopg2.connect(
+    database="gang_94_db",
+    user='gang_94',
+    password='gang_94',
+    host='csce-315-db.engr.tamu.edu',
+    port='5432'
+)
+
+cur = conn.cursor()
+#insert csv data into postgreSQL database using copy_from
+with open("employees.csv", "r") as f:
+  next(f)
+  cur.copy_from(f, "employees", sep=",")
+
+#commit changes and close connection
+conn.commit()
+cur.close()
+conn.close()
+
+print("employees table populated successfully.")
