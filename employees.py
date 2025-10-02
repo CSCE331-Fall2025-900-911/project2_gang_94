@@ -23,7 +23,7 @@ for d in range(num_days):
     for _ in range(shifts_per_day):
         # Pick random employee
         name = random.choice(employees)
-        emp_id = employee_ids[name]  # get the fixed ID for this employee
+        emp_id = d  # get the fixed ID for this employee
 
         # Simulate hours worked (short vs long shifts)
         hours_worked = random.choice([4, 6, 8])
