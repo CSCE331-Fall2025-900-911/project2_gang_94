@@ -44,7 +44,7 @@ for itemID, name, (min_q, max_q) in items:
         "expirationDate": expiration_date.date(),
         "reorderDate": reorder_date.date()
     })
-
+  
 #write data into csv file
 csv_filename = "onHandInventory.csv"
 with open(csv_filename, "w", newline="") as file:
