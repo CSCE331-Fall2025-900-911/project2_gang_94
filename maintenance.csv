@@ -1,0 +1,11 @@
+MenuID,MachineName,LastRepair,FunctionComments,CostOfRepair
+1,Tapioca Cooker,2025-08-17,Calibrated machine,211.8
+2,Tea Brewer,2025-09-03,Filter cleaned,134.05
+3,Ice Machine,2025-05-22,Filter cleaned,67.47
+4,Sealing Machine,2025-09-08,Lubricated moving parts,93.39
+5,Blender,2025-09-13,Electrical wiring fixed,150.5
+6,POS System,2025-06-17,Replaced worn parts,141.36
+7,Fridge/Freezer,2025-09-13,Fixed leakage issue,28.67
+8,Water Boiler,2025-07-22,Routine check completed,98.16
+9,Shaker Machine,2025-07-18,Replaced worn parts,85.37
+10,Syrup Dispenser,2025-06-01,Lubricated moving parts,132.62
