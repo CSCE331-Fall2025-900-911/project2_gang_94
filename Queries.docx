@@ -35,8 +35,7 @@ ORDER BY daily_sales DESC
 LIMIT 10;
 
 
-
-
+Remainig queries
 
 4.total_inventory_values.sql
 SELECT SUM(quantity * cost) AS total_value
