@@ -32,17 +32,17 @@ comments = [
 rows = []
 
 # Generate random maintenance records for each machine
-for menuID, name in machines:
+for menu_id, name in machines:
     last_repair = datetime.now() - timedelta(days=random.randint(1, 180))
     comment = random.choice(comments)
     repair_cost = round(random.uniform(20, 300), 2)
 
     rows.append({
-        "MenuID": menuID,          
-        "MachineName": name,          
-        "LastRepair": last_repair.date(),
-        "FunctionComments": comment,
-        "CostOfRepair": repair_cost
+        "menu_id": menu_id,          
+        "machine_name": name,          
+        "last_repair": last_repair.date(),
+        "function_comments": comment,
+        "cost_of_repair": repair_cost
     })
 
 #write maintenance data into csv
@@ -50,7 +50,7 @@ csv_filename = "maintenance.csv"
 with open(csv_filename, "w", newline="") as file:
     writer = csv.DictWriter(
         file,
-        fieldnames=["MenuID", "MachineName", "LastRepair", "FunctionComments", "CostOfRepair"]
+        fieldnames=["menu_id", "machine_name", "last_repair", "function_comments", "cost_of_repair"]
     )
     writer.writeheader()
     writer.writerows(rows)

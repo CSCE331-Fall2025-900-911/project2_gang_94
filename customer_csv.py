@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 import psycopg2
 
 data = [
-    ['orderid', 'itemsused', 'balancespent', 'orderdate']
+    ['order_id', 'items_used', 'balance_spent', 'order_date']
 ]
 
 drinks = {'Pearl Milk Tea': 5.80, 'Fresh Matcha': 6.25, 'Lemonade': 5.20, 'Peach Tea': 6.25, 'Iced Thai Tea': 6.75,

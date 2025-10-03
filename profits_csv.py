@@ -3,7 +3,7 @@ import random
 from datetime import datetime, timedelta
 import psycopg2
 
-data = [['startdate', 'totalsales', 'totalexpenses', 'profitchange']]
+data = [['start_date', 'total_sales', 'total_expenses', 'profit_change']]
 
 sales = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 expenses = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -13,7 +13,7 @@ with open('customers.csv', 'r', newline='') as f_read:
 
     for row in reader:
         # Skips header
-        if (row[3] == 'orderdate'):
+        if (row[3] == 'order_date'):
             continue
         stamp = row[3]
         # Formats date for easier access
@@ -39,7 +39,7 @@ for i in range(len(sales)):
         month = 1
         year += 1
 
-print(data)
+# print(data)
 
 with open('profits.csv', 'w', newline='') as f_write:
     writer = csv.writer(f_write)

@@ -37,25 +37,25 @@ for itemID, name, (min_q, max_q) in items:
   reorder_date = datetime.now() - timedelta(days=random.randint(0, 3))
 
   rows.append({
-        "itemID": itemID,
-        "itemName": name,
+        "item_id": itemID,
+        "item_name": name,
         "quantity": f"{quantity}",
         "cost": cost_per_unit,
-        "expirationDate": expiration_date.date(),
-        "reorderDate": reorder_date.date()
+        "expiration_date": expiration_date.date(),
+        "reorder_date": reorder_date.date()
     })
   
 #write data into csv file
-csv_filename = "onHandInventory.csv"
+csv_filename = "on_hand_inventory.csv"
 with open(csv_filename, "w", newline="") as file:
     writer = csv.DictWriter(
         file,
-        fieldnames=["itemID", "itemName", "quantity", "cost", "expirationDate", "reorderDate"]
+        fieldnames=["item_id", "item_name", "quantity", "cost", "expiration_date", "reorder_date"]
     )
     writer.writeheader()
     writer.writerows(rows)
 
-print(f"Onhandinventory csv generated successfully.")
+print(f"on_hand_inventory csv generated successfully.")
 
 #connect to database 
 conn = psycopg2.connect(
@@ -68,13 +68,13 @@ conn = psycopg2.connect(
 
 cur = conn.cursor()
 #insert csv data into postgreSQL database using copy_from
-with open("onHandInventory.csv", "r") as f:
+with open("on_hand_inventory.csv", "r") as f:
   next(f)
-  cur.copy_from(f, "onhandinventory", sep=",")
+  cur.copy_from(f, "on_hand_inventory", sep=",")
 
 #commit changes and close connection
 conn.commit()
 cur.close()
 conn.close()
 
-print("Onhandinventory table populated successfully.")
+print("on_hand_inventory table populated successfully.")

@@ -37,7 +37,7 @@ for itemID, name, (min_q, max_q) in items:
     reorder_date = datetime.now() - timedelta(days=random.randint(0, 5))
 
     ingredient_rows.append({
-        "itemID": itemID,
+        "item_id": itemID,
         "quantity": quantity,
         "cost": cost_per_unit,
         "expiration": expiration_date.date(),
@@ -47,7 +47,7 @@ for itemID, name, (min_q, max_q) in items:
 with open("ingredients.csv", "w", newline="") as file:
     writer = csv.DictWriter(
         file,
-        fieldnames=["itemID", "quantity", "cost", "expiration", "estimated_reorder_date"]
+        fieldnames=["item_id", "quantity", "cost", "expiration", "estimated_reorder_date"]
     )
     writer.writeheader()
     writer.writerows(ingredient_rows)

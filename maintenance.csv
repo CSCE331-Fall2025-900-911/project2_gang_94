@@ -1,11 +1,11 @@
-MenuID,MachineName,LastRepair,FunctionComments,CostOfRepair
-1,Tapioca Cooker,2025-07-24,Calibrated machine,258.86
-2,Tea Brewer,2025-09-14,Motor replaced,273.83
-3,Ice Machine,2025-04-17,Lubricated moving parts,206.42
-4,Sealing Machine,2025-09-22,Routine check completed,182.12
-5,Blender,2025-05-10,Fixed leakage issue,123.84
-6,POS System,2025-05-20,Software update applied,165.55
-7,Fridge/Freezer,2025-06-18,Fixed leakage issue,36.79
-8,Water Boiler,2025-09-23,Replaced worn parts,88.14
-9,Shaker Machine,2025-09-08,Lubricated moving parts,254.0
-10,Syrup Dispenser,2025-06-02,Lubricated moving parts,43.24
+menu_id,machine_name,last_repair,function_comments,cost_of_repair
+1,Tapioca Cooker,2025-06-04,Fixed leakage issue,197.76
+2,Tea Brewer,2025-07-30,Motor replaced,238.07
+3,Ice Machine,2025-08-23,Motor replaced,150.39
+4,Sealing Machine,2025-05-04,Software update applied,196.52
+5,Blender,2025-06-15,Motor replaced,135.72
+6,POS System,2025-06-06,Motor replaced,182.39
+7,Fridge/Freezer,2025-05-30,Lubricated moving parts,299.25
+8,Water Boiler,2025-06-16,Temperature sensor replaced,142.28
+9,Shaker Machine,2025-07-16,Software update applied,76.56
+10,Syrup Dispenser,2025-06-05,Software update applied,150.52

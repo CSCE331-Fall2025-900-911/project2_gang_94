@@ -1,6 +1,6 @@
 Special Queries
 
-1. Weekly_Sales.sql
+1. weekly_sales.sql
 SELECT
     EXTRACT(YEAR FROM orderdate) AS year,
     EXTRACT(WEEK FROM orderdate) AS week_number,
@@ -11,7 +11,7 @@ ORDER BY year, week_number;
 
 
 
-2. Realistic_sales.sql
+2. realistic_sales.sql
 SELECT
     EXTRACT(HOUR FROM orderdate) AS order_hour,
     COUNT(orderid) AS orders_placed,
@@ -22,7 +22,7 @@ ORDER BY order_hour;
 
 
 
-3. PeakSalesDay.sql
+3. peak_sales_day.sql
 -- Special Query #3: Peak Sales Day
 
 
@@ -35,7 +35,7 @@ ORDER BY daily_sales DESC
 LIMIT 10;
 
 
-Remainig queries
+Remaining queries
 
 4.total_inventory_values.sql
 SELECT SUM(quantity * cost) AS total_value
@@ -57,7 +57,7 @@ ORDER BY profit;
 
 
 
-6. Orders_with_toppings.sql
+6. orders_with_toppings.sql
 SELECT
     EXTRACT(YEAR FROM orderdate) AS year,
     EXTRACT(MONTH FROM orderdate) AS month,
@@ -67,7 +67,7 @@ WHERE itemsused LIKE '%add%'
 GROUP BY year, month
 ORDER BY month;
 
-7. Most_expensive_repair.sql
+7. most_expensive_repair.sql
 SELECT *
 FROM maintenance
 ORDER BY costofrepair DESC
@@ -75,7 +75,7 @@ LIMIT 1;
 
 
 
-8.monthly_expenses_net_profits.sql
+8. monthly_expenses_net_profits.sql
 SELECT  
     EXTRACT(YEAR FROM startdate) AS sales_year,
     EXTRACT(MONTH FROM startdate) AS sales_month,
@@ -100,7 +100,7 @@ FROM profits
 GROUP BY sales_year, sales_month, season
 ORDER BY sales_year, sales_month;
 
-9. Longest_employee.sql
+9. longest_employee.sql
 --query the find the longest working employee every day  
 SELECT name, schedule_date, hours_worked
 FROM Employees e1
@@ -111,13 +111,13 @@ WHERE hours_worked = (
 
 
 
-10.expire_7_days.sql
+10. expire_7_days.sql
 --finds the on hand inventories that expires in the next seven days
 SELECT itemid, itemname, expiration
 FROM onhandinventory
 WHERE expiration < CURRENT_DATE + INTERVAL '7 days';
 
-11. Employeers_by_served_nojoin.sql
+11. employeers_by_served_nojoin.sql
 SELECT DISTINCT "name", SUM(customers_served) AS customers_served
 FROM employees GROUP BY "name";
 
@@ -126,7 +126,7 @@ FROM employees GROUP BY "name";
 
 
 
-12. Compare_to_peak.sql
+12. compare_to_peak.sql
 SELECT
     '2024-12-25' AS peak_day,
     SUM(CASE WHEN DATE(orderdate) = '2024-12-25' THEN balancespent ELSE 0 END)::numeric::money AS peak_sale,
